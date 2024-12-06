@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Export Analytics Suite™ - AI Powered</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        .anomaly-alert {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { background-color: rgba(239, 68, 68, 0.1); }
+            50% { background-color: rgba(239, 68, 68, 0.2); }
+            100% { background-color: rgba(239, 68, 68, 0.1); }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="glass-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">AI Insights & Compliance Monitoring</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-4 bg-red-50 rounded-lg anomaly-alert">
+                    <div class="flex items-center justify-between">
+                        <span class="text-red-600 font-semibold">Weight Discrepancy</span>
+                        <i class="fas fa-exclamation-triangle text-red-600"></i>
+                    </div>
+                    <p class="text-sm text-red-500 mt-2">SB20240315001: AWB vs ULD weight mismatch</p>
+                </div>
+                <div class="p-4 bg-yellow-50 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <span class="text-yellow-600 font-semibold">LEO Pending</span>
+                        <i class="fas fa-clock text-yellow-600"></i>
+                    </div>
+                    <p class="text-sm text-yellow-500 mt-2">3 shipments awaiting LEO approval</p>
+                </div>
+                <div class="p-4 bg-green-50 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <span class="text-green-600 font-semibold">OCR Processing</span>
+                        <i class="fas fa-check text-green-600"></i>
+                    </div>
+                    <p class="text-sm text-green-500 mt-2">99.8% accuracy in last 24 hours</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="glass-card p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm mb-1">Data Accuracy</p>
+                        <h3 class="text-3xl font-bold text-gray-800" data-metric="accuracy">99.9%</h3>
+                        <p class="text-green-500 text-sm mt-2">
+                            <i class="fas fa-arrow-up mr-1"></i>+0.2%
+                        </p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center">
+                        <i class="fas fa-check-circle text-white text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+
+
+           <div class="glass-card p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm mb- 1">Real-time Latency</p>
+                        <h3 class="text-3xl font-bold text-gray-800" data-metric="latency">1.2s</h3>
+                        <p class="text-green-500 text-sm mt-2">
+                            <i class="fas fa-arrow-down mr-1"></i>-0.3s
+                        </p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center">
+                        <i class="fas fa-bolt text-white text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm mb-1">Active Shipments</p>
+                        <h3 class="text-3xl font-bold text-gray-800" data-metric="active-shipments">4</h3>
+                        <p class="text-blue-500 text-sm mt-2">
+                            <i class="fas fa-boxes mr-1"></i>Live Tracking
+                        </p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
+                        <i class="fas fa-shipping-fast text-white text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm mb-1">System Uptime</p>
+                        <h3 class="text-3xl font-bold text-gray-800" data-metric="system-uptime">99.99%</h3>
+                        <p class="text-green-500 text-sm mt-2">
+                            <i class="fas fa-server mr-1"></i>Optimal
+                        </p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card p-6 mb-8" id="filter-container">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- Global Search -->
+                <div class="relative col-span-1">
+                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                    <input type="text" 
+                           id="global-search"
+                           class="w-full pl-12 pr-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-500"
+                           placeholder="Search all fields...">
+                </div>
+        
+                <!-- Document Type Filter -->
+                <div class="relative col-span-1">
+                    <select id="document-type-filter" class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-500 appearance-none">
+                        <option value="">All Document Types</option>
+                        <option value="EGM">EGM Details</option>
+                        <option value="SB">Shipping Bill</option>
+                        <option value="X-Ray">X-Ray Details</option>
+                        <option value="Location">Location Details</option>
+                        <option value="AWB">AWB Details</option>
+                        <option value="ULD">ULD Details</option>
+                    </select>
+                </div>
+        
+                <!-- Status Filter -->
+                <div class="relative col-span-1">
+                    <select id="status-filter" class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-500 appearance-none">
+                        <option value="">All Statuses</option>
+                        <option value="In Transit">In Transit</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                </div>
+        
+                <!-- Advanced Filters Trigger -->
+                <div class="flex space-x-2 col-span-1">
+                    <button id="advanced-filters-btn" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                        <i class="fas fa-filter mr-2"></i>Advanced Filters
+                    </button>
+                    <button class="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+                        <i class="fas fa-brain mr-2"></i>AI Search
+                    </button>
+                </div>
+            </div>
+         <!--:::::::::: {#advanced-filters-modal .fixed .inset-0 .z-[9999] .hidden .items-center .justify-center .overflow-y-auto .py-8}
+::::::::::::: {.bg-white .rounded-lg .p-6 .w-full .max-w-2xl .relative .z-[10000]}
+::: {.flex .justify-between .items-center .mb-4}
+## Advanced Filters {#advanced-filters .text-xl .font-bold}
+:::
+
+
+:::::::::: {#advanced-filters-modal .fixed .inset-0 .z-[9999] .hidden .items-center .justify-center .overflow-y-auto .py-8}
+::::::::::::: {.bg-white .rounded-lg .p-6 .w-full .max-w-2xl .relative .z-[10000]}
+
+
+<title>Advanced Filters</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    /* Custom slide-down animation */
+    @keyframes fadeIn {
+        from { 
+            opacity: 0; 
+           
+        }
+        to { 
+            opacity: 1; 
+          
+        }
+    }
+
+    @keyframes fadeOut {
+        from { 
+            opacity: 1; 
+    
+        }
+        to { 
+            opacity: 0; 
+            
+        }
+    }
+ 
+
+    .modal-enter {
+        display: block;
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal-exit {
+        display: block;
+        animation: fadeOut 0.3s ease-out;
+        opacity: 0;
+    }
+</style>
+</head>
+<body>
+ Advanced Filters Button 
+<button id="open-advanced-filters" class="px-4 py-2 bg-blue-500 text-white rounded-lg">
+    Open Advanced Filters
+</button>  -->
+
+<!-- Advanced Filters Modal (Hidden by Default) -->
+
+
+<title>Advanced Filters</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    /* Custom slide-down animation */
+    @keyframes fadeIn {
+        from { 
+            opacity: 0; 
+           
+        }
+        to { 
+            opacity: 1; 
+          
+        }
+    }
+
+    @keyframes fadeOut {
+        from { 
+            opacity: 1; 
+    
+        }
+        to { 
+            opacity: 0; 
+            
+        }
+    }
+ 
+
+    .modal-enter {
+        display: block;
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal-exit {
+        display: block;
+        animation: fadeOut 0.3s ease-out;
+        opacity: 0;
+    }
+</style>
+<div id="advanced-filters-modal" class="fixed inset-0 bg-black bg-opacity-50 z-[10000] hidden items-center justify-center">
+    <div class="bg-white rounded-lg p-6 w-full max-w-2xl relative z-[10000]">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="advanced-filters text-xl font-bold">Advanced Filters</h2>
+            <button id="close-advanced-filters" class="text-gray-600 hover:text-gray-900">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4">
+            <!-- Weight Range Filter -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Weight Range (kg)</label>
+                <div class="flex space-x-2">
+                    <input type="number" id="min-weight" placeholder="Min" 
+                           class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <input type="number" id="max-weight" placeholder="Max" 
+                           class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+
+            <!-- Date Range Filter -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Date Range</label>
+                <div class="flex space-x-2">
+                    <input type="date" id="start-date" 
+                           class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <input type="date" id="end-date" 
+                           class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+
+            <!-- Location Filter -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                <select id="location-filter" multiple 
+                        class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <option value="Terminal 1">Terminal 1</option>
+                    <option value="Terminal 2">Terminal 2</option>
+                    <option value="Terminal 3">Terminal 3</option>
+                    <option value="Terminal 6">Terminal 6</option>
+                </select>
+            </div>
+
+            <!-- Additional Filters -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Additional Filters</label>
+                <div class="space-y-2">
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" id="anomaly-filter" class="form-checkbox">
+                        <span class="ml-2">Show Only Anomalies</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" id="high-priority-filter" class="form-checkbox">
+                        <span class="ml-2">High Priority Shipments</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-6 flex justify-end space-x-4">
+            <button id="reset-filters" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+                Reset Filters
+            </button>
+            <button id="apply-advanced-filters" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                Apply Filters
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const openButton = document.getElementById('open-advanced-filters');
+        const modal = document.getElementById('advanced-filters-modal');
+        const closeButton = document.getElementById('close-advanced-filters');
+        const applyButton = document.getElementById('apply-advanced-filters');
+        const resetButton = document.getElementById('reset-filters');
+
+        // Open modal
+        openButton.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            modal.classList.add('modal-enter');
+            modal.classList.remove('modal-exit');
+        });
+
+        // Close modal
+        closeButton.addEventListener('click', () => {
+            modal.classList.add('modal-exit');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('modal-enter', 'modal-exit');
+            }, 300);
+        });
+
+        // Apply filters
+        applyButton.addEventListener('click', () => {
+            // Collect filter values
+            const minWeight = document.getElementById('min-weight').value;
+            const maxWeight = document.getElementById('max-weight').value;
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            const locations = Array.from(document.getElementById('location-filter').selectedOptions)
+                .map(option => option.value);
+            const showAnomalies = document.getElementById('anomaly-filter').checked;
+            const highPriority = document.getElementById('high-priority-filter').checked;
+
+            // Example of how you might process filters (replace with your actual filtering logic)
+            console.log('Applied Filters:', {
+                minWeight,
+                maxWeight,
+                startDate,
+                endDate,
+                locations,
+                showAnomalies,
+                highPriority
+            });
+
+            // Close modal after applying
+            modal.classList.add('modal-exit');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('modal-enter', 'modal-exit');
+            }, 300);
+        });
+
+        // Reset filters
+        resetButton.addEventListener('click', () => {
+            // Reset all filter inputs
+            document.getElementById('min-weight').value = '';
+            document.getElementById('max-weight').value = '';
+            document.getElementById('start-date').value = '';
+            document.getElementById('end-date').value = '';
+            document.getElementById('location-filter').selectedIndex = -1;
+            document.getElementById('anomaly-filter').checked = false;
+            document.getElementById('high-priority-filter').checked = false;
+        });
+
+        // Optional: Close modal when clicking outside
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.classList.add('modal-exit');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('modal-enter', 'modal-exit');
+                }, 300);
+            }
+        });
+    });
+</script>
+        
+
+        <div class="glass-card p-6 mb-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Active Shipments</h2>
+                <div class="flex space-x-2">
+                    <button class="px-4 py-2 text-gray-600 hover:text-gray-800">
+                        <i class="fas fa-file-export mr-2"></i>Export
+                    </button>
+                    <button class="px-4 py-2 text-gray-600 hover:text-gray-800">
+                        <i class="fas fa-chart-bar mr-2"></i>Analytics
+                    </button>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto custom-scrollbar">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-gray-50">
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">EGM Details</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Shipping Bill</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Location</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">AWB Details</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">ULD Info</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Status</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="px-6 py-4">
+                                <div class="flex flex-col">
+                                    <span class="font-medium">EGM2024001</span>
+                                    <span class="text-xs text-gray-500">ATD: 15:30</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex flex-col">
+                                    <span class="font-medium">SB20240315000</span>
+                                    <span class="text-xs text-blue-500">LEO: 12345</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                                    Terminal 2
+                                </span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex flex-col">
+                                    <span>HAWB001</span>
+                                    <span class="text-xs text-gray-500">Weight: 1250 kg</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex flex-col">
+                                    <span>LD3-4589</span>
+                                    <span class="text-xs text-green-500">Loaded</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                                    In Transit
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-green-600 hover:text-green-800">
+                                        <i class="fas fa-history"></i>
+                                    </button>
+                                    <button class="text-purple-600 hover:text-purple-800">
+                                        <i class="fas fa-chart-line"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- New AI Insights Section -->
+        <div class="glass-card p-6 mb-8" id="ai-insights-container">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Advanced AI Insights</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-2 text-blue-800">Delay Prediction</h3>
+                    <div id="delay-prediction-insights">
+                        <p class="text-sm text-gray-600">Analyzing shipment processing patterns...</p>
+                        <div class="mt-2">
+                            <span class="text-xl font-bold" id="delay-accuracy">-</span>
+                            <span class="text-sm text-gray-500 ml-1">Prediction Accuracy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-red-50 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-2 text-red-800">Anomaly Detection</h3>
+                    <div id="anomaly-detection-insights">
+                        <p class="text-sm text-gray-600">Identifying unusual shipment characteristics...</p>
+                        <div class="mt-2">
+                            <span class="text-xl font-bold text-red-600" id="anomaly-rate">-</span>
+                            <span class="text-sm text-gray-500 ml-1">Anomaly Rate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-2 text-green-800">Predictive Insights</h3>
+                    <div id="predictive-insights">
+                        <p class="text-sm text-gray-600">Predicting shipment characteristics...</p>
+                        <div class="mt-2">
+                            <span class="text-xl font-bold text-green-600" id="avg-weight-prediction">-</span>
+                            <span class="text-sm text-gray-500 ml-1">Avg. Predicted Weight</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6">
+                <h4 class="text-lg font-semibold mb-2 text-gray-800">Detailed Anomalies</h4>
+                <div id="anomaly-details" class="space-y-2">
+
+                    <!-- Anomaly details will be dynamically populated -->
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">AI Performance Analytics</h2>
+                <div class="flex space-x-4">
+                    <button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200">24H</button>
+                    <button class="px-4 py-2 rounded-lg bg-blue-600 text-white">7D</button>
+                    <button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200">30D</button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">System Performance</h3>
+                    <canvas id="performanceChart" height="200"></canvas>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Processing Volume</h3>
+                    <canvas id="volumeChart" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+    
+<script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const globalSearch = document.getElementById('global-search');
+    const documentTypeFilter = document.getElementById('document-type-filter');
+    const statusFilter = document.getElementById('status-filter');
+    const advancedFiltersBtn = document.getElementById('advanced-filters-btn');
+    const advancedFiltersModal = document.getElementById('advanced-filters-modal');
+    const closeAdvancedFiltersBtn = document.getElementById('close-advanced-filters');
+    const applyAdvancedFiltersBtn = document.getElementById('apply-advanced-filters');
+    const resetFiltersBtn = document.getElementById('reset-filters');
+
+    // Advanced Filters Modal Toggle
+    advancedFiltersBtn.addEventListener('click', () => {
+        advancedFiltersModal.classList.remove('hidden');
+        advancedFiltersModal.classList.add('flex');
+    });
+
+    closeAdvancedFiltersBtn.addEventListener('click', () => {
+        advancedFiltersModal.classList.remove('flex');
+        advancedFiltersModal.classList.add('hidden');
+    });
+
+    // Filtering Logic
+    function applyFilters() {
+        const searchTerm = globalSearch.value.toLowerCase();
+        const documentType = documentTypeFilter.value;
+        const status = statusFilter.value;
+        const minWeight = document.getElementById('min-weight').value;
+        const maxWeight = document.getElementById('max-weight').value;
+        const startDate = document.getElementById('start-date').value;
+        const endDate = document.getElementById('end-date').value;
+        const locations = Array.from(document.getElementById('location-filter').selectedOptions).map(opt => opt.value);
+        const showAnomalies = document.getElementById('anomaly-filter').checked;
+        const showHighPriority = document.getElementById('high-priority-filter').checked;
+
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            const cells = row.getElementsByTagName('td');
+            const egmText = cells[0].textContent.toLowerCase();
+            const sbText = cells[1].textContent.toLowerCase();
+            const locationText = cells[2].textContent.toLowerCase();
+            const weightText = cells[3].textContent.toLowerCase();
+            const statusText = cells[5].textContent.toLowerCase();
+
+            const matchesSearch = searchTerm === '' || 
+                [egmText, sbText, locationText, weightText].some(text => text.includes(searchTerm));
+            
+            const matchesDocType = documentType === '' || 
+                egmText.includes(documentType.toLowerCase()) || 
+                sbText.includes(documentType.toLowerCase());
+            
+            const matchesStatus = status === '' || statusText.includes(status.toLowerCase());
+
+            const rowWeight = parseFloat(weightText.replace(/\D/g,''));
+            const matchesWeight = (minWeight === '' || rowWeight >= parseFloat(minWeight)) && 
+                                  (maxWeight === '' || rowWeight <= parseFloat(maxWeight));
+
+            // Note: You would need to implement actual date and additional filter logic
+            const matchesDateRange = true;
+            const matchesLocation = locations.length === 0 || locations.some(loc => locationText.includes(loc));
+            
+            // Example additional filter logic (you'd customize based on your data)
+            const isAnomaly = row.classList.contains('anomaly');
+            const isHighPriority = row.classList.contains('high-priority');
+            
+            const matchesAnomalyFilter = !showAnomalies || isAnomaly;
+            const matchesHighPriorityFilter = !showHighPriority || isHighPriority;
+
+            row.style.display = matchesSearch && matchesDocType && matchesStatus && 
+                                matchesWeight && matchesDateRange && matchesLocation &&
+                                matchesAnomalyFilter && matchesHighPriorityFilter ? '' : 'none';
+        });
+    }
+
+    // Event Listeners for Filters
+    [globalSearch, documentTypeFilter, statusFilter].forEach(el => {
+        el.addEventListener('input', applyFilters);
+    });
+
+    applyAdvancedFiltersBtn.addEventListener('click', () => {
+        applyFilters();
+        advancedFiltersModal.classList.remove('flex');
+        advancedFiltersModal.classList.add('hidden');
+    });
+
+    resetFiltersBtn.addEventListener('click', () => {
+        // Reset all filter inputs
+        globalSearch.value = '';
+        documentTypeFilter.value = '';
+        statusFilter.value = '';
+        document.getElementById('min-weight').value = '';
+        document.getElementById('max-weight').value = '';
+        document.getElementById('start-date').value = '';
+        document.getElementById('end-date').value = '';
+        document.getElementById('location-filter').selectedIndex = -1;
+        document.getElementById('anomaly-filter').checked = false;
+        document.getElementById('high-priority-filter').checked = false;
+
+        // Show all rows
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach(row => row.style.display = '');
+    });
+});
+
+        
+        const sampleShipments = [
+                {
+                    egmNumber: "EGM2024002",
+                    shippingBill: "SB20240315001",
+                    location: "Terminal 6",
+                    awbNumber: "HAWB001",
+                    weight: 1250,
+                    uldNumber: "LD3-4588",
+                    status: "In Transit"
+                },
+                {
+                    egmNumber: "EGM2024003",
+                    shippingBill: "SB20240315002",
+                    location: "Terminal 1",
+                    awbNumber: "HAWB002",
+                    weight: 1500,
+                    uldNumber: "LD3-4590",
+                    status: "Delivered"
+                },
+                {
+                    egmNumber: "EGM2024004",
+                    shippingBill: "SB20240315003",
+                    location: "Terminal 3",
+                    awbNumber: "HAWB003",
+                    weight: 1300,
+                    uldNumber: "LD3-4591",
+                    status: "Pending"
+                }
+            ];
+
+            // Call the function to populate the table with sample shipments
+            document.addEventListener('DOMContentLoaded', populateSampleShipments);
+
+            // Function to populate the Active Shipments table with sample data
+            function populateSampleShipments() {
+                const tableBody = document.querySelector('tbody');
+                sampleShipments.forEach(shipment => {
+                    const newRow = document.createElement('tr');
+                    newRow.className = 'border-b border-gray-100 hover:bg-gray-50';
+                    newRow.innerHTML = `
+                        <td class="px-6 py-4">
+                            <div class="flex flex-col">
+                                <span class="font-medium">${shipment.egmNumber}</span>
+                                <span class="text-xs text-gray-500">ATD: ${new Date().toLocaleTimeString()}</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex flex-col">
+                                <span class="font-medium">${shipment.shippingBill}</span>
+                                <span class="text-xs text-blue-500">LEO: N/A</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                                ${shipment.location}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex flex-col">
+                                <span>${shipment.awbNumber}</span>
+                                <span class="text-xs text-gray-500">Weight: ${shipment.weight} kg</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex flex-col">
+                                <span>${shipment.uldNumber}</span>
+                                <span class="text-xs text-green-500">Status: Loaded</span>
+                            </div> 
+                            
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center">
+                                <span class="w-2 h-2 ${shipment.status === 'In Transit' ? 'bg-green-500' : 'bg-gray-500'} rounded-full mr-2"></span>
+                                ${shipment.status}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex space-x-2">
+                                <button class="text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="text-green-600 hover:text-green-800">
+                                    <i class="fas fa-history"></i>
+                                </button>
+                                <button class="text-purple-600 hover:text-purple-800">
+                                    <i class="fas fa-chart-line"></i>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    tableBody.appendChild(newRow);
+                });
+            }
+
+        // Initialize performance chart
+        const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(performanceCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Data Accuracy (%)',
+                    data: [99.2, 99.4, 99.6, 99.5, 99.8, 99.7, 99.9],
+                    borderColor: '#3B82F6',
+                    tension: 0.4,
+                    fill: false
+                },
+                {
+                    label: 'System Response (ms)',
+                    data: [1.5, 1.4, 1.3, 1.2, 1.2, 1.1, 1.2],
+                    borderColor: '#10B981',
+                    tension: 0.4,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'System Performance Metrics'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 95
+                    }
+                }
+            }
+        });
+
+        // Initialize volume chart
+        const volumeCtx = document.getElementById('volumeChart').getContext('2d');
+        new Chart(volumeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Processed Shipments',
+                    data: [1200, 1350, 1100, 1420, 1550, 980, 1100],
+                    backgroundColor: '#6366F1',
+                    borderRadius: 4
+                },
+                {
+                    label: 'Document Processing',
+                    data: [2400, 2700, 2200, 2840, 3100, 1960, 2200],
+                    backgroundColor: '#F59E0B',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Daily Processing Volume'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Documents'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Helper function to convert an array of objects to a CSV string
+        function convertToCSV(data) {
+        const headers = Object.keys(data[0]);
+        const rows = data.map(row => headers.map(header => row[header]).join(','));
+        return [headers.join(','), ...rows].join('\n');
+        }
+
+        // Initialize real-time updates
+        setInterval(() => {
+            const randomAccuracy = (99 + Math.random()).toFixed(1);
+            const randomLatency = (1 + Math.random()).toFixed(1);
+            
+            document.querySelector('[data-metric="accuracy"]').textContent = `${randomAccuracy}%`;
+            document.querySelector('[data-metric="latency"]').textContent = `${randomLatency}s`;
+        }, 5000);
+
+        // Initialize search functionality
+        document.querySelector('input[type="text"]').addEventListener('keyup', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+
+        // Initialize filter functionality
+        document.querySelector('select').addEventListener('change', function(e) {
+            const filterValue = e.target.value;
+            const rows = document.querySelectorAll('tbody tr');
+            
+            if (filterValue === 'All Document Types') {
+                rows.forEach(row => row.style.display = '');
+                return;
+            }
+            
+            rows.forEach(row => {
+                const type = row.querySelector('td:first-child').textContent;
+                row.style.display = type.includes(filterValue) ? '' : 'none';
+            });
+        });
+
+        // WebSocket setup
+        const WS_ENDPOINT = 'ws://localhost:8000/ws/live-tracking';
+
+        function initializeWebSocket() {
+            const socket = new WebSocket(WS_ENDPOINT);
+
+            socket.onopen = function(event) {
+                console.log('WebSocket connection established');
+            };
+
+            socket.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                
+                // Update Performance Metrics
+                if (data.performance_metrics) {
+                    document.querySelector('[data-metric=" accuracy"]').textContent = `${data.performance_metrics.data_accuracy}%`;
+                    document.querySelector('[data-metric="latency"]').textContent = `${data.performance_metrics.real_time_latency}s`;
+                    document.querySelector('[data-metric="active-shipments"]').textContent = data.performance_metrics.active_shipments;
+                    document.querySelector('[data-metric="system-uptime"]').textContent = `${data.performance_metrics.system_uptime}%`;
+                }
+
+                // New ML Insights handling
+                if (data.ml_insights) {
+                    // Update Delay Prediction
+                    const delayInsights = data.ml_insights.delay_prediction;
+                    document.getElementById('delay-accuracy').textContent = 
+                        `${(delayInsights.accuracy * 100).toFixed(2)}%`;
+                    
+                    // Update Anomaly Detection
+                    const anomalyInsights = data.ml_insights.anomaly_detection;
+                    document.getElementById('anomaly-rate').textContent = 
+                        `${anomalyInsights.anomaly_rate.toFixed(2)}%`;
+                    
+                    // Update Predictive Insights
+                    const characteristicsInsights = data.ml_insights.characteristics_prediction;
+                    document.getElementById('avg-weight-prediction').textContent = 
+                        `${characteristicsInsights.insights.average_predicted_weight.toFixed(2)} kg`;
+                    
+                    // Populate Anomaly Details
+                    const anomalyDetailsContainer = document.getElementById('anomaly-details');
+                    anomalyDetailsContainer.innerHTML = '';
+                    
+                    anomalyInsights.anomaly_details.forEach(anomaly => {
+                        const anomalyElement = document.createElement('div');
+                        anomalyElement.className = 'p-3 bg-yellow-50 rounded-lg';
+                        anomalyElement.innerHTML = `
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium text-yellow-800">${anomaly.type}</span>
+                                <span class="text-sm text-yellow-600">${anomaly.shipment_id}</span>
+                            </div>
+                            <p class="text-xs text-yellow-700 mt-1">${anomaly.details}</p>
+                        `;
+                        anomalyDetailsContainer.appendChild(anomalyElement);
+                    });
+                }
+
+                // Update AI Insights
+                if (data.ai_insights) {
+                    const insightsContainer = document.getElementById('ai-insights-container');
+                    insightsContainer.innerHTML = ''; // Clear previous insights
+                    
+                    data.ai_insights.forEach(insight => {
+                        const insightElement = document.createElement('div');
+                        insightElement.className = `p-4 ${
+                            insight.severity === 'high' ? 'bg-red-50' : 
+                            insight.severity === 'medium' ? 'bg-yellow-50' : 'bg-green-50'
+                        } rounded-lg`;
+                        
+                        insightElement.innerHTML = `
+                            <div class="flex items-center justify-between">
+                                <span class="text-${
+                                    insight.severity === 'high' ? 'red' : 
+                                    insight.severity === 'medium' ? 'yellow' : 'green'
+                                }-600 font-semibold">${insight.type}</span>
+                                <i class="fas fa-${
+                                    insight.severity === 'high' ? 'exclamation-triangle text-red-600' : 
+                                    insight.severity === 'medium' ? 'clock text-yellow-600' : 'check text-green-600'
+                                }"></i>
+                            </div>
+                            <p class="text-sm text-${
+                                insight.severity === 'high' ? 'red' : 
+                                insight.severity === 'medium' ? 'yellow' : 'green'
+                            }-500 mt-2">${insight.message}</p>
+                        `;
+                        
+                        insightsContainer.appendChild(insightElement);
+                    });
+                }
+
+                // Update Active Shipments
+                if (data.active_shipments) {
+                    const tableBody = document.querySelector('tbody');
+                    tableBody.innerHTML = ''; // Clear previous shipments
+                    
+                    data.active_shipments.forEach(shipment => {
+                        const row = document.createElement('tr');
+                        row.className = 'border-b border-gray-100 hover:bg-gray-50';
+                        row.innerHTML = `
+                            <td class="px-6 py-4">
+                                <div class="flex flex-col">
+                                    <span class="font-medium">${shipment.egm_number}</span>
+                                    <span class="text-xs text-gray-500">ATD: ${new Date(shipment.created_at).toLocaleTimeString()}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex flex-col">
+                                    <span class="font-medium">${shipment.shipping_bill_number}</span>
+                                    <span class="text-xs text-blue-500">LEO: ${shipment.leo_number || 'N/A'}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                                    ${shipment.location}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex flex-col">
+                                    <span>${shipment.hawb_number}</span>
+                                    <span class="text-xs text-gray-500">Weight: ${shipment.weight} kg</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex flex-col">
+                                    <span>${shipment.uld_number}</span>
+                                    <span class="text-xs text-green-500">Status: ${shipment.status}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <span class="w-2 h-2 ${shipment.status === 'In Transit' ? 'bg-green-500' : 'bg-gray-500'} rounded-full mr-2"></span>
+                                    ${shipment.status}
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-800" onclick="viewShipmentDetails('${shipment.id}')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-green-600 hover:text-green-800" onclick="viewShipmentHistory('${shipment.id}')">
+                                        <i class="fas fa-history"></i>
+                                    </button>
+                                    <button class="text-purple-600 hover 
+                                    <i class="fas fa-chart-line"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                }
+            };
+
+            socket.onerror = function(error) {
+                console.error('WebSocket Error:', error);
+            };
+
+            socket.onclose = function(event) {
+                console.log('WebSocket connection closed');
+                setTimeout(initializeWebSocket, 5000);
+            };
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeWebSocket);
+    </script>
+</body>
+</html>
